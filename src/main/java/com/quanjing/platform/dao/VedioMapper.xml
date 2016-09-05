@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.quanjing.platform.dao.VedioDao">
+
+	
+    <resultMap id="Vedio" type="com.quanjing.model.platform.Vedio">
+        <result property="id" column="id"/>
+        <result property="subjectId" column="subject_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="infoId" column="info_id"/>
+        <result property="vedioType" column="vedio_type"/>
+        <result property="footage" column="footage"/>
+        <result property="tab" column="tab"/>
+        <result property="title" column="title"/>
+        <result property="ctitle" column="c_title"/>
+        <result property="imageId" column="image_id"/>
+        <result property="homePage" column="home_page"/>
+        <result property="carouselFigure" column="carousel_figure"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="url" column="url"/>
+    </resultMap>
+    
+    <resultMap id="VedioVo" type="com.quanjing.model.platform.vo.VedioVo" extends="Vedio"></resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+        	id ,
+        	subject_id ,
+        	channel_id ,
+        	info_id ,
+        	vedio_type ,
+        	footage ,
+        	tab ,
+        	title ,
+        	c_title ,
+        	image_id ,
+        	home_page ,
+        	carousel_figure ,
+        	create_user ,
+        	create_time ,
+        	url
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"  useGeneratedKeys="true" keyProperty="id" 
+	>
+    <![CDATA[
+        INSERT INTO vedio (
+        	id ,
+        	subject_id ,
+        	channel_id ,
+        	info_id ,
+        	vedio_type ,
+        	footage ,
+        	tab ,
+        	title ,
+        	c_title ,
+        	image_id ,
+        	home_page ,
+        	carousel_figure ,
+        	create_user ,
+        	create_time,
+        	url
+        ) VALUES (
+        	#{id} ,
+        	#{subjectId} ,
+        	#{channelId} ,
+        	#{infoId} ,
+        	#{vedioType} ,
+        	#{footage} ,
+        	#{tab} ,
+        	#{title} ,
+        	#{ctitle} ,
+        	#{imageId} ,
+        	#{homePage} ,
+        	#{carouselFigure} ,
+        	#{createUser} ,
+        	#{createTime} ,
+        	#{url}
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="update">
+        UPDATE vedio
+        <trim prefix="SET" suffixOverrides=",">  
+	        <if test="@Ognl@isNotEmpty(subjectId)">
+	        subject_id = #{subjectId,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(channelId)">
+	        channel_id = #{channelId,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(infoId)">
+	        info_id = #{infoId,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(vedioType)">
+	        vedio_type = #{vedioType,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(footage)">
+	        footage = #{footage,jdbcType=INTEGER} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(tab)">
+	        tab = #{tab,jdbcType=INTEGER} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(title)">
+	        title = #{title,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(ctitle)">
+	        c_title = #{ctitle,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(imageId)">
+	        image_id = #{imageId,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(homePage)">
+	        home_page = #{homePage,jdbcType=INTEGER} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(carouselFigure)">
+	        carousel_figure = #{carouselFigure,jdbcType=INTEGER} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(createUser)">
+	        create_user = #{createUser,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(createTime)">
+	        create_time = #{createTime,jdbcType=TIMESTAMP}, 
+	        </if>
+   	        <if test="@Ognl@isNotEmpty(url)">
+	        url = #{url,jdbcType=VARCHAR} ,
+	        </if>
+ 	     </trim>
+        WHERE 
+	        id = #{id} 
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM vedio 
+        WHERE
+	        id = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById"  resultMap="VedioVo">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM vedio 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
+	
+		
+    <select id="findCount" resultType="long">
+        SELECT count(*) FROM vedio 
+		<include refid="findWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="findPage" resultMap="VedioVo">
+    	SELECT <include refid="columns" />
+	    FROM vedio 
+		<include refid="findWhere"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+	<sql id="findWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND id = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(subjectId)">
+				AND subject_id = #{subjectId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(channelId)">
+				AND channel_id = #{channelId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(infoId)">
+				AND info_id = #{infoId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(vedioType)">
+				AND vedio_type = #{vedioType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(footage)">
+				AND footage = #{footage}
+			</if>
+	       <if test="@Ognl@isNotEmpty(tab)">
+				AND tab = #{tab}
+			</if>
+	       <if test="@Ognl@isNotEmpty(title)">
+				AND title = #{title}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ctitle)">
+				AND c_title = #{ctitle}
+			</if>
+	       <if test="@Ognl@isNotEmpty(imageId)">
+				AND image_id = #{imageId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(homePage)">
+				AND home_page = #{homePage}
+			</if>
+	       <if test="@Ognl@isNotEmpty(carouselFigure)">
+				AND carousel_figure = #{carouselFigure}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createUser)">
+				AND create_user = #{createUser}
+			</if>
+		</where>
+	</sql>
+	
+</mapper>
+

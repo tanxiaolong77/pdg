@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.quanjing.platform.dao.CollectDao">
+
+	
+    <resultMap id="Collect" type="com.quanjing.model.platform.Collect">
+        <result property="id" column="id"/>
+        <result property="vedioId" column="vedio_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+    
+    <resultMap id="CollectVo" type="com.quanjing.model.platform.vo.CollectVo" extends="Collect"></resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+        	id ,
+        	vedio_id ,
+        	user_id ,
+        	create_time 
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"  useGeneratedKeys="true" keyProperty="id" 
+	>
+    <![CDATA[
+        INSERT INTO collect (
+        	id ,
+        	vedio_id ,
+        	user_id ,
+        	create_time 
+        ) VALUES (
+        	#{id} ,
+        	#{vedioId} ,
+        	#{userId} ,
+        	#{createTime} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="update">
+        UPDATE collect
+        <trim prefix="SET" suffixOverrides=",">  
+	        <if test="@Ognl@isNotEmpty(vedioId)">
+	        vedio_id = #{vedioId,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(userId)">
+	        user_id = #{userId,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(createTime)">
+	        create_time = #{createTime,jdbcType=TIMESTAMP} 
+	        </if>
+ 	     </trim>
+        WHERE 
+	        id = #{id} 
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM collect 
+        WHERE
+	        id = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById" resultMap="Collect">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM collect 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
+	
+		
+    <select id="findCount" resultType="long">
+        SELECT count(*) FROM collect 
+		<include refid="findWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="findPage" resultMap="CollectVo">
+    	SELECT <include refid="columns" />
+	    FROM collect 
+		<include refid="findWhere"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+	<sql id="findWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND id = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(vedioId)">
+				AND vedio_id = #{vedioId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND user_id = #{userId}
+			</if>
+		</where>
+	</sql>
+	
+</mapper>
+

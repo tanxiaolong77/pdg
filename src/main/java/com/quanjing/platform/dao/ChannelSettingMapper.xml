@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.quanjing.platform.dao.ChannelSettingDao">
+
+	
+    <resultMap id="ChannelSetting" type="com.quanjing.model.platform.ChannelSetting">
+        <result property="id" column="id"/>
+        <result property="bannerImageId" column="banner_image_id"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateUser" column="update_user"/>
+    </resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+        	id ,
+        	banner_image_id ,
+        	create_user ,
+        	create_time ,
+        	update_time ,
+        	update_user 
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"  useGeneratedKeys="true" keyProperty="id" 
+	>
+    <![CDATA[
+        INSERT INTO channel_setting (
+        	id ,
+        	banner_image_id ,
+        	create_user ,
+        	create_time ,
+        	update_time ,
+        	update_user 
+        ) VALUES (
+        	#{id} ,
+        	#{bannerImageId} ,
+        	#{createUser} ,
+        	#{createTime} ,
+        	#{updateTime} ,
+        	#{updateUser} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="update">
+        UPDATE channel_setting
+        <trim prefix="SET" suffixOverrides=",">  
+	        <if test="@Ognl@isNotEmpty(bannerImageId)">
+	        banner_image_id = #{bannerImageId,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(createUser)">
+	        create_user = #{createUser,jdbcType=BIGINT} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(createTime)">
+	        create_time = #{createTime,jdbcType=TIMESTAMP} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(updateTime)">
+	        update_time = #{updateTime,jdbcType=TIMESTAMP} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(updateUser)">
+	        update_user = #{updateUser,jdbcType=BIGINT} 
+	        </if>
+ 	     </trim>
+        WHERE 
+	        id = #{id} 
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM channel_setting 
+        WHERE
+	        id = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById" resultMap="ChannelSetting">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM channel_setting 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
+	
+		
+    <select id="findCount" resultType="long">
+        SELECT count(*) FROM channel_setting 
+		<include refid="findWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="findPage" resultMap="ChannelSetting">
+    	SELECT <include refid="columns" />
+	    FROM channel_setting 
+		<include refid="findWhere"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+	<sql id="findWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND id = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(bannerImageId)">
+				AND banner_image_id = #{bannerImageId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createUser)">
+				AND create_user = #{createUser}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND create_time >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND create_time &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(updateUser)">
+				AND update_user = #{updateUser}
+			</if>
+		</where>
+	</sql>
+	
+</mapper>
+
