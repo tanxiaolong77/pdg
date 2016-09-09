@@ -9,7 +9,7 @@ package com.quanjing.platform.query;
 
 import com.quanjing.util.framework.BaseQuery;
 
-public class ArticleQuery extends BaseQuery implements java.io.Serializable {
+public class SysUserQuery extends BaseQuery implements java.io.Serializable {
 	private static final long serialVersionUID = 5454155825314635342L;
 	
 	private java.lang.Long id;
