@@ -1,6 +1,7 @@
 package com.quanjing.platform.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import com.github.pagehelper.PageInfo;
 import com.pdg.model.Article;
 import com.pdg.model.ArticleCategory;
 import com.quanjing.pdg.dao.ArticleDao;
-import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.ArticleCategoryService;
 import com.quanjing.platform.service.ArticleService;
 import com.quanjing.platform.service.base.BaseService;
@@ -31,7 +31,7 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 	}
 
 	@Override
-	public PageInfo findPage(ArticleQuery query) {
+	public PageInfo findPage(Map query) {
 		PageHelper.startPage(query);
 		List<Article> list = articleDao.findPage(query);
 		if(list != null && list.size() > 0){

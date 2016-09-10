@@ -13,6 +13,37 @@ public class ArticleQuery extends BaseQuery implements java.io.Serializable {
 	private static final long serialVersionUID = 5454155825314635342L;
 	
 	private java.lang.Long id;
+	
+	/** categoryId */
+	private java.lang.Long categoryId;
+	
+	/** creatTime */
+	private java.util.Date creatTimeBegin;
+	private java.util.Date creatTimeEnd;
+
+	public java.lang.Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(java.lang.Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public java.util.Date getCreatTimeBegin() {
+		return creatTimeBegin;
+	}
+
+	public void setCreatTimeBegin(java.util.Date creatTimeBegin) {
+		this.creatTimeBegin = creatTimeBegin;
+	}
+
+	public java.util.Date getCreatTimeEnd() {
+		return creatTimeEnd;
+	}
+
+	public void setCreatTimeEnd(java.util.Date creatTimeEnd) {
+		this.creatTimeEnd = creatTimeEnd;
+	}
 
 	public java.lang.Long getId() {
 		return id;
