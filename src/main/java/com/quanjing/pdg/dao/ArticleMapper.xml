@@ -11,7 +11,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="subtitle" column="subtitle"/>
-        <result property="category" column="category"/>
+        <result property="categoryId" column="category_id"/>
         <result property="coverUrl" column="cover_url"/>
         <result property="summary" column="summary"/>
         <result property="content" column="content"/>
@@ -26,7 +26,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	id ,
         	title ,
         	subtitle ,
-        	category ,
+        	category_id ,
         	cover_url ,
         	summary ,
         	content ,
@@ -44,7 +44,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	id ,
         	title ,
         	subtitle ,
-        	category ,
+        	category_id ,
         	cover_url ,
         	summary ,
         	content ,
@@ -55,7 +55,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	#{id} ,
         	#{title} ,
         	#{subtitle} ,
-        	#{category} ,
+        	#{categoryId} ,
         	#{coverUrl} ,
         	#{summary} ,
         	#{content} ,
