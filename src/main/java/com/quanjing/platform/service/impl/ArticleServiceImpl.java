@@ -42,6 +42,6 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 		}
 		return new PageInfo(list);
 	}
-	
+
 	
 }

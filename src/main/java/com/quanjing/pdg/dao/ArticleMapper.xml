@@ -59,9 +59,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	#{coverUrl} ,
         	#{summary} ,
         	#{content} ,
-        	#{create_time} ,
-        	#{update_time} ,
-        	#{user_id}
+        	#{createTime} ,
+        	#{updateTime} ,
+        	#{userId}
         )
     ]]>
 		<!--	
@@ -77,9 +77,25 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         UPDATE article
         <trim prefix="SET" suffixOverrides=",">  
 	        <if test="@Ognl@isNotEmpty(title)">
-	        title = #{title}
+	       		title = #{title} ,
 	        </if>
- 	     </trim>
+	        <if test="@Ognl@isNotEmpty(subtitle)">
+				subtitle = #{subtitle} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(categoryId)">
+				category_id = #{categoryId} ,
+			</if>
+			<if test="coverUrl">
+				cover_url = #{coverUrl} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(summary)">
+	       		summary = #{summary} ,
+	        </if>
+	        <if test="@Ognl@isNotEmpty(content)">
+	        	content = #{content} ,
+	        </if>
+	        update_time = now(),
+	        </trim>
         WHERE 
 	        id = #{id} 
 	</update>
