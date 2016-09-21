@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pdg.model.Article;
+import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.base.EntityDao;
 
 
@@ -20,4 +21,5 @@ public interface ArticleDao extends EntityDao<Article,java.lang.Long>{
 	public List<Article> findPage(Map query);
 	
 
+	public List<Article> findPage(ArticleQuery query);
 }

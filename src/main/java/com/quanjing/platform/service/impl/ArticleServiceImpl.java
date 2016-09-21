@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import com.pdg.model.Article;
 import com.pdg.model.ArticleCategory;
 import com.quanjing.pdg.dao.ArticleDao;
+import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.ArticleCategoryService;
 import com.quanjing.platform.service.ArticleService;
 import com.quanjing.platform.service.base.BaseService;
@@ -41,6 +42,18 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 			}
 		}
 		return new PageInfo(list);
+	}
+	
+	public List<Article> findPage(ArticleQuery query) {
+		PageHelper.startPage(query);
+		List<Article> list = articleDao.findPage(query);
+		if(list != null && list.size() > 0){
+			for (Article article : list) {
+				ArticleCategory category = categoryService.getById(article.getCategoryId());
+				article.setCategoryName(category.getName());
+			}
+		}
+		return list;
 	}
 
 	
