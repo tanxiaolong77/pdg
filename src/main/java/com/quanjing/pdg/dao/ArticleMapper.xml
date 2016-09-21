@@ -20,6 +20,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="userId" column="user_id"/>
     </resultMap>
     
+   	<resultMap id="ArticleVo" type="com.pdg.vo.ArticleVo" extends="Article"></resultMap>
+    
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="columns">
 	    <![CDATA[
@@ -108,7 +110,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     ]]>
     </delete>
     
-    <select id="getById"  resultMap="Article">
+    <select id="getById"  resultMap="ArticleVo">
 		SELECT <include refid="columns" />
 	    <![CDATA[
 		    FROM article 

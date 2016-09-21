@@ -10,10 +10,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pdg.model.Article;
 import com.pdg.model.ArticleCategory;
+import com.pdg.vo.ArticleVo;
 import com.quanjing.pdg.dao.ArticleDao;
 import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.ArticleCategoryService;
 import com.quanjing.platform.service.ArticleService;
+import com.quanjing.platform.service.SysUserService;
 import com.quanjing.platform.service.base.BaseService;
 import com.quanjing.platform.service.base.EntityDao;
 
@@ -25,6 +27,9 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 	
 	@Autowired
 	private ArticleCategoryService categoryService;
+	
+	@Autowired
+	private SysUserService sysUserService;
 	
 	@Override
 	protected EntityDao getEntityDao() {
@@ -54,6 +59,19 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 			}
 		}
 		return list;
+	}
+	
+	/***
+	 * 返回详细
+	 */
+	public ArticleVo getById(Long id){
+		ArticleVo vo = (ArticleVo)articleDao.getById(id);
+		if(null != vo){
+			//装载外键
+			vo.setArticleCategory(categoryService.getById(vo.getCategoryId()));
+			vo.setUser(sysUserService.getById(vo.getUserId()));
+		}
+		return null;
 	}
 
 	

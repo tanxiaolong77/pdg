@@ -8,9 +8,10 @@ import com.pdg.vo.MainVo;
 import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.ArticleCategoryService;
 import com.quanjing.platform.service.ArticleService;
+import com.quanjing.platform.service.MainService;
 
 @Service("mainService")
-public class MainServiceImpl {
+public class MainServiceImpl implements MainService{
 
 	@Autowired
 	private ArticleService articleService;

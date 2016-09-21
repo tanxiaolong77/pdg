@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
 import com.pdg.model.Article;
+import com.pdg.vo.ArticleVo;
 import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.base.EntityService;
 
@@ -22,5 +23,7 @@ public interface ArticleService extends EntityService<Article,java.lang.Long>{
 	public PageInfo findPage(Map query);
 	
 	public List<Article> findPage(ArticleQuery query);
+	
+	public ArticleVo getById(Long id);
 	
 }
