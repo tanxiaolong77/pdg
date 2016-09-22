@@ -37,6 +37,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	user_id 
 	    ]]>
 	</sql>
+	<sql id="base_columns">
+	    <![CDATA[
+        	id ,
+        	title ,
+        	category_id ,
+        	cover_url ,
+        	summary ,
+        	create_time
+	    ]]>
+	</sql>
 
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
 	<insert id="insert"  useGeneratedKeys="true" keyProperty="id" 
@@ -130,7 +140,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
         <select id="findPage" resultMap="Article">
-    	SELECT <include refid="columns" />
+    	SELECT <include refid="base_columns" />
 	    FROM article 
 		<include refid="findPage_where"/>
 		
