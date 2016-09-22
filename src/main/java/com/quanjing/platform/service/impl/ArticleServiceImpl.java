@@ -49,7 +49,7 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 		return new PageInfo(list);
 	}
 	
-	public List<Article> findPage(ArticleQuery query) {
+	public List findPage(ArticleQuery query) {
 		PageHelper.startPage(query);
 		List<Article> list = articleDao.findPage(query);
 		if(list != null && list.size() > 0){

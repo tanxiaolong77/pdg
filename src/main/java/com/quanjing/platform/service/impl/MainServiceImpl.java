@@ -3,7 +3,6 @@ package com.quanjing.platform.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.PageHelper;
 import com.pdg.vo.MainVo;
 import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.ArticleCategoryService;
@@ -29,11 +28,9 @@ public class MainServiceImpl implements MainService{
 		 */
 		ArticleQuery articleQuery = new ArticleQuery();
 		articleQuery.setSortColumns("create_time desc");
-		
 		articleQuery.setCategoryId(1L);
+		articleQuery.setPageNum(1);
 		articleQuery.setPageSize(8);
-		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setSchoolDynamic(articleService.findPage(articleQuery));
 		
 		/***
@@ -42,7 +39,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(2L);
 		articleQuery.setPageSize(8);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setIndustryNews(articleService.findPage(articleQuery));
 		
 		/***
@@ -51,7 +47,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(16L);
 		articleQuery.setPageSize(5);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setFormerStudent(articleService.findPage(articleQuery));
 		
 		/***
@@ -60,7 +55,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(6L);
 		articleQuery.setPageSize(7);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setSchoolEnvironment(articleService.findPage(articleQuery));
 		
 		/***
@@ -69,7 +63,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(17L);
 		articleQuery.setPageSize(4);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setFAQs(articleService.findPage(articleQuery));
 		
 		/***
@@ -78,7 +71,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(8L);
 		articleQuery.setPageSize(4);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setNewsReport(articleService.findPage(articleQuery));
 		
 		/***
@@ -87,7 +79,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(9L);
 		articleQuery.setPageSize(4);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setStudentsThoughts(articleService.findPage(articleQuery));
 		
 		/***
@@ -96,7 +87,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(10L);
 		articleQuery.setPageSize(20);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setCosmetology(articleService.findPage(articleQuery));
 		
 		/***
@@ -105,7 +95,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(11L);
 		articleQuery.setPageSize(20);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setPetCare(articleService.findPage(articleQuery));
 		
 		/***
@@ -114,7 +103,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(12L);
 		articleQuery.setPageSize(20);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setPetRaising(articleService.findPage(articleQuery));
 		
 		/***
@@ -123,7 +111,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(13L);
 		articleQuery.setPageSize(20);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setPetNews(articleService.findPage(articleQuery));
 		
 		/***
@@ -132,7 +119,6 @@ public class MainServiceImpl implements MainService{
 		articleQuery.setCategoryId(14L);
 		articleQuery.setPageSize(20);
 		articleQuery.setPageNum(0);
-		PageHelper.startPage(articleQuery);
 		resultVo.setPetHotSpots(articleService.findPage(articleQuery));
 		
 		return resultVo;

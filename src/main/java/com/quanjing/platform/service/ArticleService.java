@@ -22,7 +22,7 @@ public interface ArticleService extends EntityService<Article,java.lang.Long>{
 	
 	public PageInfo findPage(Map query);
 	
-	public List<Article> findPage(ArticleQuery query);
+	public List findPage(ArticleQuery query);
 	
 	public ArticleVo getById(Long id);
 	
