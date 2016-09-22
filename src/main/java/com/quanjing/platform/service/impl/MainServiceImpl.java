@@ -38,7 +38,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(2L);
 		articleQuery.setPageSize(8);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setIndustryNews(articleService.findPage(articleQuery));
 		
 		/***
@@ -46,7 +46,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(16L);
 		articleQuery.setPageSize(5);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setFormerStudent(articleService.findPage(articleQuery));
 		
 		/***
@@ -54,7 +54,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(6L);
 		articleQuery.setPageSize(7);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setSchoolEnvironment(articleService.findPage(articleQuery));
 		
 		/***
@@ -62,7 +62,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(17L);
 		articleQuery.setPageSize(4);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setFAQs(articleService.findPage(articleQuery));
 		
 		/***
@@ -70,7 +70,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(8L);
 		articleQuery.setPageSize(4);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setNewsReport(articleService.findPage(articleQuery));
 		
 		/***
@@ -78,7 +78,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(9L);
 		articleQuery.setPageSize(4);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setStudentsThoughts(articleService.findPage(articleQuery));
 		
 		/***
@@ -86,7 +86,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(10L);
 		articleQuery.setPageSize(20);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setCosmetology(articleService.findPage(articleQuery));
 		
 		/***
@@ -94,7 +94,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(11L);
 		articleQuery.setPageSize(20);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setPetCare(articleService.findPage(articleQuery));
 		
 		/***
@@ -102,7 +102,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(12L);
 		articleQuery.setPageSize(20);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setPetRaising(articleService.findPage(articleQuery));
 		
 		/***
@@ -110,7 +110,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(13L);
 		articleQuery.setPageSize(20);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setPetNews(articleService.findPage(articleQuery));
 		
 		/***
@@ -118,7 +118,7 @@ public class MainServiceImpl implements MainService{
 		 */
 		articleQuery.setCategoryId(14L);
 		articleQuery.setPageSize(20);
-		articleQuery.setPageNum(0);
+		articleQuery.setPageNum(1);
 		resultVo.setPetHotSpots(articleService.findPage(articleQuery));
 		
 		return resultVo;
