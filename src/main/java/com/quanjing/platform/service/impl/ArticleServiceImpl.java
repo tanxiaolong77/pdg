@@ -73,6 +73,10 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 		}
 		return null;
 	}
+	
+	public List<Article> getByCategoryId(Long categoryId){
+		return articleDao.getByCategoryId(categoryId);
+	}
 
 	
 }

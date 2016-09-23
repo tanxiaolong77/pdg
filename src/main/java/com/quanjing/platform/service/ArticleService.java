@@ -26,4 +26,6 @@ public interface ArticleService extends EntityService<Article,java.lang.Long>{
 	
 	public ArticleVo getById(Long id);
 	
+	public List<Article> getByCategoryId(Long categoryId);
+	
 }
