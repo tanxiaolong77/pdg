@@ -27,6 +27,15 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	status
 	    ]]>
 	</sql>
+	
+	<select id="getById"  resultMap="SysUser">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM sys_user 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
     
     <select id="getByUsername"  resultMap="SysUser">
 		SELECT <include refid="columns" />

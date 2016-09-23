@@ -70,6 +70,7 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 			//装载外键
 			vo.setArticleCategory(categoryService.getById(vo.getCategoryId()));
 			vo.setUser(sysUserService.getById(vo.getUserId()));
+			return vo;
 		}
 		return null;
 	}
