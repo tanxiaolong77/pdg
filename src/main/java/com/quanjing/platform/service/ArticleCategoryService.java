@@ -5,6 +5,8 @@
 
 package com.quanjing.platform.service;
 
+import java.util.List;
+
 import com.github.pagehelper.PageInfo;
 import com.pdg.model.ArticleCategory;
 import com.quanjing.platform.query.ArticleCategoryQuery;
@@ -14,5 +16,7 @@ public interface ArticleCategoryService extends EntityService<ArticleCategory,Lo
 	
 	
 	public PageInfo findPage(ArticleCategoryQuery query);
+	
+	public List<ArticleCategory> hotTag();
 	
 }

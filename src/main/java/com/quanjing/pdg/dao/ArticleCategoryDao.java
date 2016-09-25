@@ -13,6 +13,6 @@ public interface ArticleCategoryDao extends  EntityDao<ArticleCategory,java.lang
 
 	public List<ArticleCategory> findAll();
 	
-
+	public List<ArticleCategory> hotTag();
 
 }

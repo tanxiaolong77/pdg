@@ -40,6 +40,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	    FROM  article_category  
 		<include refid="findPage_where"/>
 	</select>	
+	
+     <select id="hotTag" resultMap="ArticleCategory">
+		select <include refid="columns" />
+		FROM  article_category 
+		order by rand() limit 20
+	</select>	
 		
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页

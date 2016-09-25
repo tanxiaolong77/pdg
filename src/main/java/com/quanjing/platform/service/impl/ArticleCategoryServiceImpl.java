@@ -38,5 +38,10 @@ public class ArticleCategoryServiceImpl extends BaseService<ArticleCategory,java
 		return new PageInfo<ArticleCategory>(list);
 		
 	}
+
+	@Override
+	public List<ArticleCategory> hotTag() {
+		return articleCategoryDao.hotTag();
+	}
 	
 }
