@@ -10,6 +10,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     <resultMap id="SysUser" type="com.pdg.model.SysUser">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
+        <result property="nickname" column="nickname"/>
         <result property="password" column="password"/>
         <result property="userType" column="user_type"/>
         <result property="createTime" column="create_time"/>
@@ -21,6 +22,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	    <![CDATA[
         	id ,
         	username ,
+        	nickname ,
         	password ,
         	user_type ,
         	create_time ,
