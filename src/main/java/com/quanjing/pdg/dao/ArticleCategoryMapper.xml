@@ -44,7 +44,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
      <select id="hotTag" resultMap="ArticleCategory">
 		select <include refid="columns" />
 		FROM  article_category 
-		order by rand() limit 20
+		order by creat_time desc limit 20
 	</select>	
 		
     <!--

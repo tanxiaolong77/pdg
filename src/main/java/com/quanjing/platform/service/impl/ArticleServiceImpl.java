@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import com.pdg.model.Article;
 import com.pdg.model.ArticleCategory;
 import com.pdg.vo.ArticleVo;
+import com.pdg.vo.MainVo;
 import com.quanjing.pdg.dao.ArticleDao;
 import com.quanjing.platform.query.ArticleQuery;
 import com.quanjing.platform.service.ArticleCategoryService;
@@ -79,5 +80,33 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 		return articleDao.getByCategoryId(categoryId);
 	}
 
+	public MainVo schoolEnvironment() {
+		MainVo resultVo = new MainVo();
+		
+		/***
+		 * 学校环境 主页默认显示7条
+		 */
+		ArticleQuery articleQuery = new ArticleQuery();
+		articleQuery.setSortColumns("create_time desc");
+		articleQuery.setCategoryId(1L);
+		articleQuery.setPageNum(1);
+		articleQuery.setPageSize(7);
+		resultVo.setSchoolEnvironment(findPage(articleQuery));
+		
+		/***
+		 * 实操课程 主页默认显示7条
+		 */
+		articleQuery.setCategoryId(20L);
+		resultVo.setPracticalCourse(findPage(articleQuery));
+		/***
+		 * 医疗课程 主页默认显示7条
+		 */
+		articleQuery.setCategoryId(21L);
+		resultVo.setMedicalCourses(findPage(articleQuery));
+		
+
+		
+		return resultVo;
+	}
 	
 }
