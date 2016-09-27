@@ -42,9 +42,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</select>	
 	
      <select id="hotTag" resultMap="ArticleCategory">
-		select <include refid="columns" />
-		FROM  article_category 
-		order by creat_time desc limit 20
+		select id,name
+		FROM  article_category where has_hot_tag = 1
 	</select>	
 		
     <!--
