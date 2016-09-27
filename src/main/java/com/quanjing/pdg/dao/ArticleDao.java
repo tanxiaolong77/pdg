@@ -23,5 +23,7 @@ public interface ArticleDao extends EntityDao<Article,java.lang.Long>{
 
 	public List<Article> findPage(ArticleQuery query);
 	
+	public List<Article> findList(ArticleQuery query);
+	
 	public List<Article>  getByCategoryId(Long categoryId);
 }

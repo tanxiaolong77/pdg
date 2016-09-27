@@ -62,6 +62,12 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 		return list;
 	}
 	
+	public List findList(ArticleQuery query) {
+		PageHelper.startPage(query);
+		List<Article> list = articleDao.findList(query);
+		return list;
+	}
+	
 	/***
 	 * 返回详细
 	 */

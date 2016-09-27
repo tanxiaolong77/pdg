@@ -25,6 +25,8 @@ public interface ArticleService extends EntityService<Article,java.lang.Long>{
 	
 	public List findPage(ArticleQuery query);
 	
+	public List findList(ArticleQuery query);
+	
 	public ArticleVo getById(Long id);
 	
 	public List<Article> getByCategoryId(Long categoryId);
