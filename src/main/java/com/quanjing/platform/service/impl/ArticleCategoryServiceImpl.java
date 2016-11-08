@@ -6,7 +6,6 @@
 package com.quanjing.platform.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,9 +38,12 @@ public class ArticleCategoryServiceImpl extends BaseService<ArticleCategory,java
 		
 	}
 
-	@Override
 	public List<ArticleCategory> hotTag() {
 		return articleCategoryDao.hotTag();
+	}
+	
+	public List<ArticleCategory>  findArticleCategory(ArticleCategoryQuery query){
+		return articleCategoryDao.findPage(query);
 	}
 	
 }

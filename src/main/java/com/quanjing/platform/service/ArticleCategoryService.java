@@ -17,6 +17,8 @@ public interface ArticleCategoryService extends EntityService<ArticleCategory,Lo
 	
 	public PageInfo findPage(ArticleCategoryQuery query);
 	
+	public List<ArticleCategory>  findArticleCategory(ArticleCategoryQuery query);
+	
 	public List<ArticleCategory> hotTag();
 	
 }

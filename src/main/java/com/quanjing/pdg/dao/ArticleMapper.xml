@@ -142,6 +142,11 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	    ]]>
 	</select>
 	
+    <select id="selectOne"  resultMap="ArticleVo">
+		SELECT <include refid="columns" /> FROM article 
+		<include refid="findPage_where"/>
+	</select>
+	
     <select id="getByCategoryId"  resultMap="ArticleVo">
 		SELECT id,title
 	    <![CDATA[

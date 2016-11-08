@@ -82,6 +82,18 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 		return null;
 	}
 	
+	
+	public ArticleVo selectOne(Map map){
+		ArticleVo vo = (ArticleVo)articleDao.selectOne(map);
+		if(null != vo){
+			//装载外键
+			vo.setArticleCategory(categoryService.getById(vo.getCategoryId()));
+			vo.setUser(sysUserService.getById(vo.getUserId()));
+			return vo;
+		}
+		return null;
+	}
+	
 	public List<Article> getByCategoryId(Long categoryId){
 		return articleDao.getByCategoryId(categoryId);
 	}
@@ -94,7 +106,7 @@ public class ArticleServiceImpl extends BaseService<Article, java.lang.Long> imp
 		 */
 		ArticleQuery articleQuery = new ArticleQuery();
 		articleQuery.setSortColumns("create_time desc");
-		articleQuery.setCategoryId(1L);
+		articleQuery.setCategoryId(6L);
 		articleQuery.setPageNum(1);
 		articleQuery.setPageSize(7);
 		resultVo.setSchoolEnvironment(findPage(articleQuery));

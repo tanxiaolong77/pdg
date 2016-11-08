@@ -33,4 +33,6 @@ public interface ArticleService extends EntityService<Article,java.lang.Long>{
 	
 	public MainVo schoolEnvironment();
 	
+	public ArticleVo selectOne(Map map);
+	
 }
